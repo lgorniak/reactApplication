@@ -1,0 +1,96 @@
+---
+description: A comprehensive set of clean code rules derived from Clean Code Developer grades and universal directives, intended to guide AI code generation and modification towards high-quality, maintainable software.
+globs:
+alwaysApply: true
+---
+
+I. Roter Grad (Red Grade): Cultivating Foundational Attitudes
+Strive for simplicity (KISS principle). When generating code or solutions, prefer the simplest approach that effectively solves the problem and avoids unnecessary complexity.
+
+Avoid duplication (DRY principle). If similar code patterns are needed across different parts of the codebase, prompt me to consider creating reusable functions, methods, or modules instead of duplicating logic.
+
+Apply the Boy Scout Rule: Aim to leave any code you modify slightly cleaner than you found it. If you identify small, safe improvements (e.g., clarifying a variable name, simplifying a conditional expression) while working on a task, suggest them or apply them if confidence in the improvement is high and the risk is minimal.
+
+Ensure all generated code, including variables, functions, classes, and modules, has clear, intention-revealing names. Names should accurately describe their purpose, be unambiguous, and be easily understandable by other developers.
+
+When refactoring is requested or suggested, focus on small, incremental changes that improve clarity, structure, or simplicity without altering the external behavior of the code. Clearly explain the purpose and benefit of any suggested refactoring.
+
+All code you generate or modify must be in English, including comments, variable names, class names, function names, and any generated documentation.
+
+II. Orangener Grad (Orange Grade): Embedding Fundamental Principles & Automation
+Maintain a Single Level of Abstraction (SLA) within functions and methods. Avoid mixing high-level policy logic with low-level implementation details in the same block of code. If a function becomes too complex or difficult to read due to multiple abstraction levels, suggest breaking it down into smaller, more focused helper functions, each handling a consistent level of detail.
+
+Adhere to the Single Responsibility Principle (SRP). Classes, modules, and functions you define or modify should have one primary responsibility or reason to change. If a unit of code appears to be taking on multiple distinct responsibilities, highlight this and suggest potential refactoring into smaller, more cohesive and focused units.
+
+Practice Separation of Concerns (SoC). When generating or modifying code, clearly separate distinct concerns such as business logic, data access, UI presentation, logging, configuration, and error handling. Avoid intermingling these concerns within a single function or class more than is strictly necessary. If you identify a cross-cutting concern, note it and suggest appropriate patterns for its management (e.g., middleware, aspects if applicable to the language/framework, or dedicated utility functions/classes).
+
+Follow consistent source code conventions. For naming: use descriptive and unambiguous names; help distinguish between different types of identifiers (e.g., fields, local variables, constants, classes, interfaces) by convention or by prompting me for project-specific conventions if unclear. For comments: comments should primarily explain why code is written a certain way, not what it does if the code itself is clear and self-documenting. Avoid unnecessary or redundant comments. If existing code in the project demonstrates a clear convention, adhere to it.
+
+When suggesting or implementing solutions, especially those involving interactions between multiple components or with external systems (e.g., databases, APIs), briefly consider and mention how the correctness of these interactions might be verified, potentially by an integration test.
+
+III. Gelber Grad (Yellow Grade): Enhancing Testability and Design through OO Principles
+Design interfaces to be minimal and client-specific (Interface Segregation Principle - ISP). Avoid creating 'fat' interfaces that force clients to depend on methods they don't use. When defining or modifying interfaces, consider if they can be made smaller or if multiple, more specific interfaces would be more appropriate for different client needs.
+
+Depend on abstractions, not concretions (Dependency Inversion Principle - DIP). High-level modules or classes should not depend directly on low-level modules or classes; both should depend on abstractions (e.g., interfaces or abstract classes). When generating code that involves dependencies between components, prefer injecting these dependencies (e.g., via constructor arguments, method parameters, or property setters) using abstract types rather than allowing the consuming code to instantiate concrete classes directly.
+
+Ensure that subtypes are substitutable for their base types (Liskov Substitution Principle - LSP). Derived classes or types must be usable in any context where their base class or type is expected, without altering the correctness of the program or violating the contracts (e.g., pre-conditions, post-conditions, invariants, exception throwing behavior) established by the base type.
+
+Minimize surprise (Principle of Least Astonishment). Code, especially the public APIs of classes and functions, should behave in a way that is intuitive, predictable, and consistent with its name and documented purpose. Avoid non-obvious side effects in functions that appear to be simple queries (adhere to Command Query Separation). If a function must have non-obvious behavior or side effects, ensure this is clearly documented or suggest renaming for improved clarity.
+
+Practice information hiding (encapsulation). Expose only the essential details and functionalities through a class's or module's public interface. Keep internal implementation details, data structures, and helper methods private or protected to reduce coupling and allow internal changes to be made without adversely affecting client code.
+
+When generating classes, methods, or functions, always consider their unit testability. Aim for designs that allow for isolated testing of individual units. If a piece of code seems inherently difficult to unit test (e.g., due to tight coupling, hidden dependencies, or excessive side effects), point this out and suggest design modifications (such as applying DIP or extracting dependencies) to improve its testability.
+
+If generating code that relies on external dependencies (e.g., database connections, network services, complex objects), and if appropriate for the context of unit testing, suggest the use of mock objects, stubs, or other test doubles to facilitate isolated testing of the code unit.
+
+IV. Grüner Grad (Green Grade): Focusing on Robustness, Automation, and Structure
+Implement robust and specific error handling. Anticipate potential failure modes in the code you generate. Include appropriate mechanisms for error detection, and handle errors gracefully (e.g., using specific try-catch blocks, returning clear error codes or objects). Errors messages should be informative and aid in debugging. Avoid catching generic exceptions unless absolutely necessary and properly handled. Consider logging errors appropriately.
+
+When generating code, ensure it is structured in a way that facilitates automated builds and testing on an independent Continuous Integration (CI) system. Avoid hardcoding platform-specific paths or configurations unless explicitly requested and clearly isolated. Dependencies should be manageable through standard package managers.
+
+If generating build scripts (e.g., Makefiles, package.json scripts) or configurations for CI/CD pipelines, ensure they are clear, maintainable, and automate as much of the build, test, and quality check process as is feasible and appropriate for the project's context.
+
+Strive for consistent code structure throughout the project. If a dominant architectural pattern (e.g., MVC, MVVM, Layered Architecture, Microservices) is evident in the existing codebase or has been specified, new code you generate should conform to this pattern. Adhere strictly to established project patterns and conventions.
+
+Code should be organized into logical modules, packages, or namespaces. Each such unit should have clear responsibilities and well-defined interfaces for interaction with other units. Group related functionality cohesively.
+
+Minimize dependencies between modules or components. Aim for loose coupling to improve maintainability, testability, and the ability to modify or replace modules independently. Prefer communication through well-defined interfaces over direct dependencies on concrete implementations of other modules.
+
+V. Blauer Grad (Blue Grade): Instilling Architectural and Process Discipline
+Embrace YAGNI (You Ain't Gonna Need It). Only generate code, features, or configurations that are directly requested or clearly necessary to fulfill the immediate, specified requirements. Avoid adding speculative functionality or over-engineering solutions for potential future problems that may not arise, unless explicitly instructed to consider such extensibility.
+
+When asked to implement a non-trivial feature or a complex piece of logic, if the requirements are unclear, ambiguous, or incomplete, ask for clarification before proceeding. If a design or plan is not provided for such a task, suggest outlining a plan or design first, possibly in pseudocode or as a series of steps, and seek confirmation before writing the full implementation.
+
+When generating new components, modules, or significant features, briefly consider how they might be versioned and deployed as part of a larger system. Code should be structured, where appropriate, to support independent deployment or integration into a Continuous Delivery pipeline.
+
+Promote component-based design where appropriate for the complexity of the system. Suggest breaking down complex systems into smaller, independent, and reusable components, each with well-defined interfaces (contracts). Emphasize defining these contracts (interfaces) first, before diving deep into the implementation of each component.
+
+Adopt a 'Test First' mindset where feasible and appropriate. Before generating complex logic for a function or method, consider what tests would define its correctness and cover its primary behaviors and edge cases. You might briefly outline these test cases or conditions before proceeding with the implementation code.
+
+Ensure that the generated code implementation clearly and accurately reflects any provided design, architectural plan, or specified contract. If a deviation from the provided design is necessary or beneficial, this deviation must be for a compelling, explicitly stated reason, and it should be clearly highlighted for review.
+
+When designing interfaces, services, or components, ensure that the design (the contract, or public API) is distinct from the internal implementation details. Clients of the component should depend only on the stable, public contract, not on the internal workings, which should be encapsulated and free to change without breaking clients.
+
+VI. Weißer Grad (White Grade): Towards a Holistic Clean Code Mindset
+Continuously apply all learned clean code principles (such as simplicity, clarity, SRP, DRY, DIP, YAGNI, ISP, LSP, etc.) in every task you undertake. If multiple principles seem relevant or are in slight tension for a given problem, briefly state the trade-offs you are considering in your proposed solution or approach.
+
+If a request is ambiguous, incomplete, or could lead to code that inadvertently violates fundamental clean code principles, you MUST ask clarifying questions to ensure the intent aligns with high-quality software development practices before proceeding with code generation or modification.
+
+When modifying existing code, if you identify clear and safe opportunities for refactoring towards better adherence to clean code principles (even if these areas are not directly part of the current task), highlight these opportunities. Ask if I would like you to address them, and if so, briefly estimate the scope or nature of the suggested refactoring.
+
+Always be receptive to feedback on the code you generate. If I provide corrections, alternative approaches, or explain why a suggestion was not ideal, strive to understand and incorporate this feedback to improve the relevance and quality of your responses in future interactions.
+
+When providing explanations, justifications for your code design choices, or suggestions for improvements, reference relevant clean code principles (e.g., 'This approach follows SRP by...', 'To improve testability according to DIP, consider...') if applicable and helpful for understanding.
+
+VII. Universal Clean Code Directives
+Prefer functional programming constructs (e.g., pure functions, immutability, higher-order functions) where they enhance clarity, testability, and reduce side effects. However, use object-oriented patterns if they are more conventional or suitable for the specific problem domain, language, or framework in use. Strive for a balance that prioritizes readability and maintainability.
+
+Generated functions and methods should aim for immutability of their input parameters. Avoid modifying input data structures (like lists, dictionaries, or objects) directly within the function. Instead, if modifications are necessary, create and return new data structures with the desired changes. Minimize side effects; functions should primarily achieve their purpose and communicate results through their return values.
+
+Prioritize readability in all generated code. Use clear, descriptive, and unambiguous names for all identifiers (variables, functions, classes, modules, etc.). The structure of the code should be logical and easy for a human to follow. Use whitespace (indentation, blank lines) and formatting consistently to enhance visual clarity and structure.
+
+When generating or modifying code, aim for the minimal set of changes necessary to accomplish the requested task. Avoid reformatting or altering unrelated sections of code unless specifically instructed to do so, or if it's a very minor, safe improvement that directly aligns with the Boy Scout Rule and does not risk unintended consequences.
+
+Write all comments in English only. Comments should serve to explain why a particular piece of code exists or why a certain approach was taken, especially if it's non-obvious. Avoid comments that merely restate what the code is doing if the code itself is clear and self-explanatory. Do not leave commented-out code in the final version.
+
+If you are asked to create a plan for the implementation of a feature or a complex task, you MUST first create a detailed, step-by-step pseudocode plan or a structured outline of the approach. You must then confirm this plan with me before proceeding to write the actual code for implementation.

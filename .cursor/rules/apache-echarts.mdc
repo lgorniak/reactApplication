@@ -1,0 +1,64 @@
+---
+description: These rules define a standardized, best-practice methodology for an AI developer to integrate the Apache ECharts library into a modern React 19 application using Vite. The primary objective is to produce a final implementation that is highly performant, maintainable, and robust by default. The guiding principles are: maximum control via a manual wrapper, aggressive performance optimization from the outset, and seamless integration with the modern toolchain.
+globs:
+alwaysApply: false
+---
+
+AI Implementation Rules for Integrating Apache ECharts into a React 19 Project
+Preamble
+These rules define a standardized, best-practice methodology for an AI developer to integrate the Apache ECharts library into a modern React 19 application using Vite. The primary objective is to produce a final implementation that is highly performant, maintainable, and robust by default. The guiding principles are: maximum control via a manual wrapper, aggressive performance optimization from the outset, and seamless integration with the modern toolchain.
+
+Rule 1: Component Architecture - The Manual Wrapper Principle
+Ownership over Abstraction: You must not use any third-party wrapper libraries (e.g., echarts-for-react). You must create a dedicated, reusable functional component (e.g., ReactECharts.tsx) to serve as a manual wrapper. This ensures full control over the lifecycle and insulates the project from dependency maintenance risks.
+
+DOM Reference: The wrapper component must use the useRef hook to create a stable reference to a <div> element. This div will be the designated container for the ECharts instance.
+
+Lifecycle Management: The ECharts instance lifecycle must be managed within a useEffect hook with an empty dependency array ([]).
+
+Initialization: The effect must call echarts.init() on the ref.current element to create the chart instance when the component mounts.
+
+Cleanup: The effect must return a cleanup function that calls chart.dispose() on the instance when the component unmounts. This is non-negotiable to prevent memory leaks in a Single Page Application.
+
+Reactive Updates: A separate useEffect hook must be used to apply chart configurations.
+
+This effect must have the option prop as its primary dependency ([option]).
+
+Upon execution, it must retrieve the chart instance using getInstanceByDom() and apply the new configuration via chart.setOption().
+
+Rule 2: Performance - Aggressive Bundle Size Reduction
+Enforce Tree-Shaking: You must implement on-demand importing for all ECharts modules.
+
+Prohibited: import \* as echarts from 'echarts'; is strictly forbidden.
+
+Required: Import the core engine, renderers, chart types, and components from their specific entry points:
+
+import \* as echarts from 'echarts/core';
+
+import { CanvasRenderer } from 'echarts/renderers'; (or SVGRenderer)
+
+import { BarChart, LineChart } from 'echarts/charts'; (only import required charts)
+
+import { GridComponent, TooltipComponent } from 'echarts/components'; (only import required components)
+
+Prioritize Canvas Renderer: For optimal performance, especially with large datasets or complex animations, you must configure ECharts to render using Canvas. The SVG renderer should only be considered for specific use cases where its benefits (e.g., accessibility, resolution independence) are a primary requirement and performance is secondary.
+
+Module Registration: All imported ECharts modules must be explicitly registered with the core engine using echarts.use([...]) before any echarts.init() call is made.
+
+Rule 3: Performance - Asynchronous Loading and Time-to-Interactive (TTI)
+Lazy Loading by Default: The manual wrapper component (ReactECharts.tsx) must be loaded asynchronously. You must use React.lazy() for dynamic import() of the component at the point of use.
+
+Suspense for User Experience: The lazy-loaded chart component must be wrapped in a <Suspense> boundary. A non-trivial fallback UI (e.g., a themed skeleton loader component) must be provided to avoid layout shift and inform the user of a loading state.
+
+Solve the Initialization Race Condition: You must account for the fact that a suspended component's container div has zero dimensions. The echarts.init() call must be deferred until the container is visible and measurable. The required method is to use a ResizeObserver within the wrapper component. The observer's callback, which fires once the component is rendered with dimensions, will trigger the chart initialization and the initial setOption call.
+
+Rule 4: Responsiveness and Interactivity
+Automated Resizing: The wrapper component must implement a ResizeObserver that watches the container div. The observer's callback must call the chart.resize() method to ensure the chart fluidly adapts to its container's size changes without requiring manual intervention. The observer must be disconnected in the useEffect cleanup function.
+
+Event Handling: The wrapper must accept an onEvents prop, which is an object mapping ECharts event names to callback functions. A useEffect hook with [onEvents] as a dependency must be used to manage these listeners, ensuring that old listeners are cleared before new ones are attached to prevent duplicates.
+
+Rule 5: Toolchain and Compatibility
+Modern ECharts Version: The project must use apache-echarts version 5.5.0 or newer to leverage its native ESM support.
+
+Vite Configuration: The vite.config.ts file must not contain any ECharts-specific workarounds (e.g., entries in optimizeDeps.include). The integration should rely on Vite's standard ESM handling.
+
+React 19 Context: The use of useEffect for managing the lifecycle of the ECharts instance is the correct and required pattern. It correctly models synchronizing an external, imperative system (ECharts) with React's declarative state and lifecycle. No current React 19 feature supersedes this pattern for this specific use case.
