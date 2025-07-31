@@ -1,7 +1,7 @@
 // Core ECharts engine - REQUIRED
 import * as echarts from "echarts/core";
 import { CanvasRenderer } from "echarts/renderers";
-import { LineChart, BarChart } from "echarts/charts";
+import { LineChart } from "echarts/charts";
 
 import {
   GridComponent,
@@ -16,7 +16,6 @@ export function registerEChartsModules(): void {
   echarts.use([
     CanvasRenderer,
     LineChart,
-    BarChart,
     GridComponent,
     TooltipComponent,
     TitleComponent,

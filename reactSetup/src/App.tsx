@@ -2,6 +2,7 @@ import { signal } from "@preact/signals-react";
 import reactLogo from "./assets/react.svg";
 import viteLogo from "/vite.svg";
 import "./App.css";
+import SignalLineChart from "./components/charts/definitions/SignalLineChart";
 
 function App() {
   const countSignal = signal(0);
@@ -24,6 +25,12 @@ function App() {
         <p>
           Edit <code>src/App.tsx</code> and save to test HMR
         </p>
+      </div>
+
+      {/* ECharts Demo */}
+      <div className="card">
+        <h2>Apache ECharts Demo</h2>
+        <SignalLineChart />
       </div>
       <p className="read-the-docs">
         Click on the Vite and React logos to learn more
