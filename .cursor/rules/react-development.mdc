@@ -1,0 +1,60 @@
+---
+description: Best modern practices for react v19 frontend only development
+globs:
+alwaysApply: true
+---
+
+1. Establish the Environment Context First
+
+Primary Rule: When a user requests React code, I must first determine if the context is a frontend-only application (e.g., SPA, Vite, Create React App) or one that supports server-side features (e.g., Next.js).
+
+Action: If the context is frontend-only, I will explicitly state that my response adheres to client-side-only patterns and that features like React Server Components and "use server" are not applicable.
+
+2. Prioritize Modern, Idiomatic React v19 Patterns
+
+Data Fetching: I must generate code that uses the use(promise) hook for all data-fetching operations inside components, paired with <Suspense> to handle loading states declaratively.
+
+Data Mutation & Forms: I must generate code that uses the Actions pattern. The action will be a client-side function that performs an API call. I will use useActionState, useFormStatus, and useOptimistic to manage the form's lifecycle and UI feedback.
+
+Ref Forwarding: I will always implement ref forwarding by accepting ref as a direct prop.
+
+Context: I will always use the direct <MyContext value={...}> syntax for providing context.
+
+3. Be an Explanatory and Educational Tool
+
+Justify the Modern Approach: When I generate code that omits a legacy pattern, I must briefly explain why it's omitted and what new feature (e.g., React Compiler, use hook) replaces it.
+
+Clarity on "Actions": I must be clear that in a frontend-only context, an "Action" is a client-side function and does not involve the "use server" directive.
+
+Code Comments: I should add concise comments to the generated code to highlight the new hooks (use, useActionState, etc.) and their roles.
+
+Outdated & Classic Anti-Patterns to Avoid 🛑
+This section defines legacy patterns and fundamental anti-patterns that I must actively avoid generating. My goal is to produce clean, modern, and correct code.
+
+A. Outdated React 19 Patterns
+Manual Memoization (useMemo, useCallback, React.memo): I will not generate these hooks by default. I must operate on the principle that the React Compiler makes these optimizations automatic.
+
+useEffect for Data Fetching: I must not generate useEffect combined with useState to manage data fetching. I will explain that use(promise) with <Suspense> is the modern replacement.
+
+forwardRef Higher-Order Component: I will not generate the forwardRef wrapper, as ref is now a standard prop.
+
+Manual Form State Management: For form submissions, I will not generate multiple useState hooks for isLoading, error, etc. I will use useActionState instead.
+
+<Context.Provider> Syntax: I will not generate the .Provider suffix for a Context component, using <MyContext value={...}> instead.
+
+B. Timeless React Anti-Patterns
+Defining Components Inside Components:
+
+Rule: I must never define a component function inside the render body of another component. I will explain that this creates a new component type on every render, which breaks React's reconciliation model, destroys state, and causes severe performance issues that the React Compiler cannot fix. Components must always be defined at the top level of a module.
+
+Using Array Index as a key:
+
+Rule: I must not use an array's index as the key prop when rendering a list. I will emphasize that a key must be a stable and unique identifier from the data (e.g., item.id). Using the index leads to incorrect UI behavior and bugs when the list is reordered or filtered.
+
+Mutating State Directly:
+
+Rule: I must never generate code that mutates state directly (e.g., myArray.push(newItem)). State updates must always be immutable, creating a new object or array. I will explain that direct mutation prevents React from detecting changes, causing the UI to not update.
+
+Over-reliance on useEffect:
+
+Rule: I will strictly limit the use of useEffect. I must not use it for data fetching, reacting to state changes, or handling data mutations. I will explain that its primary purpose now is to synchronize with external, non-React systems (like third-party libraries or direct DOM manipulation). For all other cases, I will use a modern React 19 alternative like Actions or the use hook.

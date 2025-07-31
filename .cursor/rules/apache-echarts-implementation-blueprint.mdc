@@ -1,0 +1,161 @@
+---
+description: Of course. Here is a comprehensive set of implementation rules for an AI LLM, designed to ensure the generated code strictly follows the provided modern ECharts integration blueprint for React 19.
+
+AI Implementation Rules for ECharts in React 19
+These rules define the methodology for integrating Apache ECharts into a modern, client-side React 19 application using Vite. The primary objective is a highly performant, maintainable, and robust implementation.
+globs:
+alwaysApply: false
+---
+
+### Rule 1: The Manual Wrapper Component
+
+You **must** create a single, generic, and reusable manual wrapper component named `ReactECharts.tsx`.
+
+- **No Third-Party Wrappers**: You are strictly forbidden from using any third-party wrapper libraries like `echarts-for-react`.
+- **DOM Reference**: Use the `useRef` hook to get a stable reference to the `div` element that will contain the chart.
+- **Lifecycle Management**:
+  - Use a `useEffect` hook with an empty dependency array (`[]`) for initialization and cleanup.
+  - **Initialization**: Inside this effect, call `echarts.init()` on the `ref.current` element.
+  - **Cleanup**: The effect **must** return a cleanup function that calls `chart.dispose()` on the ECharts instance to prevent memory leaks.
+- **Reactive Updates**:
+  - Use a separate `useEffect` hook that depends on the `option` and `theme` props (`[option, theme]`) to handle updates.
+  - Inside this effect, retrieve the chart instance using `echarts.getInstanceByDom()` and apply the new configuration via `chart.setOption(option)`.
+
+<!-- end list -->
+
+```typescript
+// Correct implementation structure for ReactECharts.tsx
+import { useRef, useEffect } from "react";
+import * as echarts from "echarts/core";
+// ... other ECharts imports
+
+// Props interface for the wrapper
+interface ReactEChartsProps {
+  option: echarts.EChartsOption;
+  theme?: string | object;
+  // ... other props like onEvents
+}
+
+const ReactECharts = ({ option, theme }: ReactEChartsProps) => {
+  const chartRef = useRef<HTMLDivElement>(null);
+
+  // Effect for initialization and disposal
+  useEffect(() => {
+    let chart: echarts.ECharts | undefined;
+    if (chartRef.current) {
+      chart = echarts.init(chartRef.current, theme);
+    }
+
+    return () => {
+      chart?.dispose();
+    };
+  }, [theme]); // Re-initialize if theme changes
+
+  // Effect for applying options
+  useEffect(() => {
+    if (chartRef.current) {
+      const chart = echarts.getInstanceByDom(chartRef.current);
+      chart?.setOption(option);
+    }
+  }, [option]); // Re-apply options if they change
+
+  return <div ref={chartRef} style={{ width: "100%", height: "100%" }} />;
+};
+
+export default ReactECharts;
+```
+
+---
+
+### Rule 2: Aggressive Performance Optimization
+
+You **must** prioritize performance by minimizing bundle size and optimizing rendering.
+
+- **Enforce Tree-Shaking**: All ECharts modules must be imported on-demand from their specific entry points.
+  - **Prohibited**: `import * as echarts from 'echarts';`
+  - **Required**:
+    ```typescript
+    // Core engine
+    import * as echarts from "echarts/core";
+    // Renderers (Canvas is the default)
+    import { CanvasRenderer } from "echarts/renderers";
+    // Required Chart Types
+    import { LineChart, BarChart } from "echarts/charts";
+    // Required Components
+    import {
+      TitleComponent,
+      TooltipComponent,
+      GridComponent,
+      LegendComponent,
+    } from "echarts/components";
+    ```
+- **Module Registration**: All imported ECharts modules **must** be explicitly registered using `echarts.use([...])` in a central setup file (e.g., `main.tsx` or a dedicated `lib/echarts.ts`) before any chart is rendered.
+- **Prioritize Canvas Renderer**: You must configure ECharts to use the `CanvasRenderer` by default for optimal performance.
+
+---
+
+### Rule 3: Asynchronous Loading & Interactivity
+
+You **must** implement patterns that improve Time-to-Interactive (TTI) and ensure chart responsiveness.
+
+- **Lazy Loading**: The chart "definition" components (e.g., `SalesLineChart.tsx`) that use the `ReactECharts` wrapper **must** be loaded asynchronously using `React.lazy()`.
+- **Suspense Fallback**: The lazy-loaded chart component **must** be wrapped in a `<Suspense>` boundary with a meaningful fallback UI (e.g., a skeleton loader) to prevent layout shift.
+- **Responsiveness**: The `ReactECharts.tsx` wrapper **must** use a `ResizeObserver` to monitor its container `div`. The observer's callback **must** call the `chart.resize()` method. The observer must be disconnected during the component's cleanup phase.
+- **Event Handling**: The wrapper **must** accept an `onEvents` prop, which is an object mapping ECharts event names to callback functions (e.g., `{ 'click': handleClick }`). A `useEffect` hook must manage adding and removing these listeners to prevent duplicates.
+
+---
+
+### Rule 4: Modern Data Flow & State Management (React 19)
+
+You **must** use modern, idiomatic React 19 patterns for data handling.
+
+- **Data Fetching**:
+  - You are **forbidden** from using `useEffect` with `useState` for data fetching.
+  - You **must** use the `use(promise)` hook inside your chart definition components to fetch data. The component will automatically suspend while the promise is pending.
+- **Data Mutation**: For any chart interactions that trigger data changes, you **must** use the React Actions pattern. Use `useActionState` to manage the form/action lifecycle (pending, error states) and `useOptimistic` for immediate UI feedback.
+- **No Manual Memoization**: You **must not** generate `useMemo` or `useCallback` by default. Assume the React Compiler will handle these optimizations.
+
+---
+
+### Rule 5: Project Structure & Configuration
+
+You **must** organize the code in a logical, maintainable structure.
+
+- **Separation of Concerns**:
+
+  - **Wrapper**: `/components/charts/ReactECharts.tsx` (the generic wrapper)
+  - **Definitions**: `/components/charts/definitions/SalesLineChart.tsx` (a specific chart implementation that fetches data and defines options)
+  - **Configuration Factories**: `/lib/chart-options/lineChartOptions.ts` (helper functions that take data and return a complete ECharts `option` object. This enforces the DRY principle).
+  - **ECharts Setup**: `/lib/echarts.ts` (central place for `echarts.use([...])` registration).
+
+- **Example Workflow**:
+
+  1.  The `App` component lazy-loads `SalesLineChart`.
+  2.  `SalesLineChart` uses `use(fetchData())` to get data.
+  3.  It then calls a configuration factory, e.g., `createSalesLineOption(data)`.
+  4.  It passes the returned option object to the `<ReactECharts />` component.
+
+<!-- end list -->
+
+```typescript
+// /components/charts/definitions/SalesLineChart.tsx
+import { use } from "react";
+import ReactECharts from "@/components/charts/ReactECharts";
+import { createSalesLineOption } from "@/lib/chart-options/lineChartOptions";
+import { api } from "@/lib/api"; // Assume a fetch utility
+
+// The promise is created outside the component
+const salesDataPromise = api.get("/sales-data");
+
+function SalesLineChart() {
+  // use() unwraps the promise, suspending the component if necessary
+  const salesData = use(salesDataPromise);
+
+  // The logic for creating the option is cleanly separated
+  const option = createSalesLineOption(salesData);
+
+  return <ReactECharts option={option} />;
+}
+
+export default SalesLineChart;
+```
