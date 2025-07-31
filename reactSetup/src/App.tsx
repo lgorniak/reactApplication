@@ -1,8 +1,14 @@
 import { signal } from "@preact/signals-react";
+import { lazy, Suspense } from "react";
 import reactLogo from "./assets/react.svg";
 import viteLogo from "/vite.svg";
 import "./App.css";
-import SignalLineChart from "./components/charts/definitions/SignalLineChart";
+import ChartSkeleton from "./components/ui/ChartSkeleton";
+
+// Lazy load the chart component
+const SignalLineChart = lazy(
+  () => import("./components/charts/definitions/SignalLineChart")
+);
 
 function App() {
   const countSignal = signal(0);
@@ -27,11 +33,13 @@ function App() {
         </p>
       </div>
 
-      {/* ECharts Demo */}
       <div className="card">
         <h2>Apache ECharts Demo</h2>
-        <SignalLineChart />
+        <Suspense fallback={<ChartSkeleton />}>
+          <SignalLineChart />
+        </Suspense>
       </div>
+
       <p className="read-the-docs">
         Click on the Vite and React logos to learn more
       </p>
