@@ -1,5 +1,6 @@
 import { signal } from "@preact/signals-react";
 import { lazy, Suspense } from "react";
+import { Card } from "primereact/card";
 import reactLogo from "./assets/react.svg";
 import viteLogo from "/vite.svg";
 import "./App.css";
@@ -15,30 +16,30 @@ function App() {
 
   return (
     <>
-      <div>
+      <Card title="Technology Stack" className="">
         <a href="https://vite.dev" target="_blank">
           <img src={viteLogo} className="logo" alt="Vite logo" />
         </a>
         <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
+          <img src={reactLogo} className="logo" alt="React logo" />
         </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
+        <h1 style={{ textAlign: "center", margin: "1rem 0" }}>Vite + React</h1>
+      </Card>
+
+      <Card title="Interactive Counter">
         <button onClick={() => (countSignal.value += 1)}>
           count is {countSignal}
         </button>
-        <p>
+        <p style={{ marginTop: "1rem" }}>
           Edit <code>src/App.tsx</code> and save to test HMR
         </p>
-      </div>
+      </Card>
 
-      <div className="card">
-        <h2>Apache ECharts Demo</h2>
+      <Card title="Apache ECharts Demo">
         <Suspense fallback={<ChartSkeleton />}>
           <SignalLineChart />
         </Suspense>
-      </div>
+      </Card>
 
       <p className="read-the-docs">
         Click on the Vite and React logos to learn more
