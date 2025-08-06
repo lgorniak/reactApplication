@@ -1,6 +1,7 @@
 import { signal } from "@preact/signals-react";
 import { lazy, Suspense } from "react";
 import { Card } from "primereact/card";
+import { Button } from "primereact/button";
 import reactLogo from "./assets/react.svg";
 import viteLogo from "/vite.svg";
 import "./App.css";
@@ -16,6 +17,8 @@ function App() {
 
   return (
     <>
+      <div className="mainLayout">testing</div>
+
       <Card title="Technology Stack" className="">
         <a href="https://vite.dev" target="_blank">
           <img src={viteLogo} className="logo" alt="Vite logo" />
@@ -27,9 +30,9 @@ function App() {
       </Card>
 
       <Card title="Interactive Counter">
-        <button onClick={() => (countSignal.value += 1)}>
+        <Button onClick={() => (countSignal.value += 1)}>
           count is {countSignal}
-        </button>
+        </Button>
         <p style={{ marginTop: "1rem" }}>
           Edit <code>src/App.tsx</code> and save to test HMR
         </p>
