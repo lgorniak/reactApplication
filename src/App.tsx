@@ -1,50 +1,54 @@
-import { signal } from "@preact/signals-react";
+import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
 import { lazy, Suspense } from "react";
-import { Card } from "primereact/card";
-import reactLogo from "./assets/react.svg";
-import viteLogo from "/vite.svg";
+import { Button } from "primereact/button";
 import "./App.css";
-import ChartSkeleton from "./components/ui/ChartSkeleton";
+import Home from "./components/pages/Home";
 
-// Lazy load the chart component
-const SignalLineChart = lazy(
-  () => import("./components/charts/definitions/SignalLineChart")
+// Lazy load the React Flow component
+const ReactFlowExample = lazy(
+  () => import("./components/flow/ReactFlowExample")
 );
 
 function App() {
-  const countSignal = signal(0);
-
   return (
-    <>
-      <Card title="Technology Stack" className="">
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo" alt="React logo" />
-        </a>
-        <h1 style={{ textAlign: "center", margin: "1rem 0" }}>Vite + React</h1>
-      </Card>
+    <Router>
+      <div className="app">
+        {/* Navigation Header */}
+        <nav
+          style={{
+            padding: "1rem",
+            borderBottom: "1px solid #e0e0e0",
+            marginBottom: "1rem",
+            display: "flex",
+            justifyContent: "space-between",
+            alignItems: "center",
+          }}
+        >
+          <h2 style={{ margin: 0 }}>React Application</h2>
+          <div style={{ display: "flex", gap: "0.5rem" }}>
+            <Link to="/">
+              <Button label="Home" icon="pi pi-home" text />
+            </Link>
+            <Link to="/flow">
+              <Button label="React Flow" icon="pi pi-sitemap" text />
+            </Link>
+          </div>
+        </nav>
 
-      <Card title="Interactive Counter">
-        <button onClick={() => (countSignal.value += 1)}>
-          count is {countSignal}
-        </button>
-        <p style={{ marginTop: "1rem" }}>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </Card>
-
-      <Card title="Apache ECharts Demo">
-        <Suspense fallback={<ChartSkeleton />}>
-          <SignalLineChart />
-        </Suspense>
-      </Card>
-
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
+        {/* Routes */}
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route
+            path="/flow"
+            element={
+              <Suspense fallback={<div>Loading React Flow...</div>}>
+                <ReactFlowExample />
+              </Suspense>
+            }
+          />
+        </Routes>
+      </div>
+    </Router>
   );
 }
 
