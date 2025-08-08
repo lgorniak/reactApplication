@@ -1,8 +1,23 @@
 #root {
   max-width: 1280px;
   margin: 0 auto;
-  padding: 2rem;
-  text-align: center;
+}
+
+.react-flow__node {
+  .p-fieldset {
+    height: 150px;
+    width: 100%;
+    border: 1px solid var(--primary-color);
+    border-radius: 0;
+
+    .p-fieldset-legend {
+      text-align: left;
+      padding: 0.4375rem 0.65625rem;
+      font-size: 0.875rem;
+      border-radius: 0;
+      font-weight: 600;
+    }
+  }
 }
 
 .logo {
@@ -33,10 +48,10 @@
   }
 }
 
-.card {
+/* .card {
   padding: 2em;
   margin: 1rem;
-}
+} */
 
 .read-the-docs {
   color: #888;

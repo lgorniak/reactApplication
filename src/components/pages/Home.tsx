@@ -7,6 +7,7 @@ import reactLogo from "../../assets/react.svg";
 import viteLogo from "/vite.svg";
 import "../../App.css";
 import ChartSkeleton from "../ui/ChartSkeleton";
+import { Fieldset } from "primereact/fieldset";
 
 // Lazy load the chart component
 const SignalLineChart = lazy(
@@ -18,6 +19,7 @@ export default function Home() {
 
   return (
     <>
+      <Fieldset legend={"testing"}></Fieldset>
       <Card title="Technology Stack">
         <a href="https://vite.dev" target="_blank">
           <img src={viteLogo} className="logo" alt="Vite logo" />

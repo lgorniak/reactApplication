@@ -30,22 +30,3 @@ export function getSmartHandleStyle(
   // Target handles get arrows pointing toward the node
   return getTargetArrowStyle(position, customStyles);
 }
-
-/**
- * Convenience function for creating target handles with automatic arrow styling
- */
-export function getTargetHandleStyle(
-  position: Position,
-  customStyles: CSSProperties = {}
-): CSSProperties {
-  return getSmartHandleStyle("target", position, customStyles);
-}
-
-/**
- * Convenience function for creating source handles with invisible styling
- */
-export function getSourceHandleStyle(
-  customStyles: CSSProperties = {}
-): CSSProperties {
-  return getSmartHandleStyle("source", Position.Left, customStyles);
-}

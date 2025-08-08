@@ -1,9 +1,6 @@
 import { Handle, Position, type NodeProps } from "@xyflow/react";
 import { Card } from "primereact/card";
-import {
-  getSourceHandleStyle,
-  getTargetHandleStyle,
-} from "../utils/smartHandleStyles";
+import { getSmartHandleStyle } from "../utils/smartHandleStyles";
 
 // Custom node with left and right handles using Card
 export function LeftRight({ data }: NodeProps) {
@@ -13,13 +10,13 @@ export function LeftRight({ data }: NodeProps) {
         type="target"
         position={Position.Left}
         id="left"
-        style={getTargetHandleStyle(Position.Left, { left: "-2px" })}
+        style={getSmartHandleStyle("target", Position.Left, { left: "-2px" })}
       />
       <Handle
         type="target"
         position={Position.Right}
         id="right-top"
-        style={getTargetHandleStyle(Position.Right, {
+        style={getSmartHandleStyle("target", Position.Right, {
           top: "30%",
           right: "-2px",
         })}
@@ -28,7 +25,7 @@ export function LeftRight({ data }: NodeProps) {
         type="source"
         position={Position.Right}
         id="right-bottom"
-        style={getSourceHandleStyle({ bottom: "4px" })}
+        style={getSmartHandleStyle("source", Position.Right, { bottom: "4px" })}
       />
       <Card
         style={{
