@@ -1,15 +1,15 @@
-import { Handle, Position, type NodeProps } from "@xyflow/react";
+import { Handle, Position } from "@xyflow/react";
 import { getSmartHandleStyle } from "../utils/smartHandleStyles";
 
 // Mini node with left and right handles - 3px x 3px
-export function MiniLeftRight({ data }: NodeProps) {
+export function MiniLeftRight() {
   return (
     <div style={{ position: "relative" }}>
       <Handle
         type="source"
         position={Position.Left}
         id="left"
-        style={{ opacity: 0, left: "6px" }}
+        style={{ opacity: 0, left: "1px" }}
       />
       <Handle
         type="target"
@@ -19,12 +19,10 @@ export function MiniLeftRight({ data }: NodeProps) {
       />
       <div
         style={{
-          width: "3px",
-          height: "3px",
+          width: "1px",
+          height: "1px",
         }}
-      >
-        {String(data?.label || "")}
-      </div>
+      />
     </div>
   );
 }

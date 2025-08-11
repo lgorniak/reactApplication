@@ -58,7 +58,7 @@ export const BasicScenario: Scenario = {
     {
       id: "5",
       position: { x: 200, y: 225 },
-      data: { label: "miniLeftRight" },
+      data: {},
       type: "miniLeftRight",
     },
   ],
@@ -70,7 +70,12 @@ export const BasicScenario: Scenario = {
       target: "2",
       targetHandle: "left",
       type: "smoothstep",
-      style: { stroke: "#ff6b6b" },
+      animated: true,
+      style: {
+        stroke: "#ff6b6b",
+        strokeWidth: 2,
+        strokeDasharray: "5,5",
+      },
     },
     {
       id: "e1-3",
@@ -79,16 +84,12 @@ export const BasicScenario: Scenario = {
       target: "3",
       targetHandle: "left",
       type: "smoothstep",
-      style: { stroke: "#4ecdc4" },
-    },
-    {
-      id: "e2-3",
-      source: "2",
-      sourceHandle: "bottom",
-      target: "3",
-      targetHandle: "right-top",
-      type: "smoothstep",
-      style: { stroke: "#45b7d1" },
+      animated: true,
+      style: {
+        stroke: "#4ecdc4",
+        strokeWidth: 2,
+        strokeDasharray: "5,5",
+      },
     },
     {
       id: "e2-5",
@@ -97,7 +98,12 @@ export const BasicScenario: Scenario = {
       target: "5",
       targetHandle: "right",
       type: "smoothstep",
-      style: { stroke: "#45b7d1" },
+      animated: true,
+      style: {
+        stroke: "#45b7d1",
+        strokeWidth: 2,
+        strokeDasharray: "5,5",
+      },
     },
     {
       id: "e5-3",
@@ -106,7 +112,12 @@ export const BasicScenario: Scenario = {
       target: "3",
       targetHandle: "right-top",
       type: "smoothstep",
-      style: { stroke: "#45b7d1" },
+      animated: true,
+      style: {
+        stroke: "#45b7d1",
+        strokeWidth: 2,
+        strokeDasharray: "5,5",
+      },
     },
   ],
 };
