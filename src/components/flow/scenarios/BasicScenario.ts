@@ -51,7 +51,7 @@ export const BasicScenario: Scenario = {
     },
     {
       id: "4",
-      position: { x: 200, y: 250 },
+      position: { x: 400, y: 250 },
       data: { label: "top" },
       type: "top",
     },
@@ -94,7 +94,7 @@ export const BasicScenario: Scenario = {
     {
       id: "e2-5",
       source: "2",
-      sourceHandle: "bottom",
+      sourceHandle: "bottom-left",
       target: "5",
       targetHandle: "right",
       type: "smoothstep",
@@ -111,6 +111,20 @@ export const BasicScenario: Scenario = {
       sourceHandle: "left",
       target: "3",
       targetHandle: "right-top",
+      type: "smoothstep",
+      animated: true,
+      style: {
+        stroke: "#45b7d1",
+        strokeWidth: 2,
+        strokeDasharray: "5,5",
+      },
+    },
+    {
+      id: "e3-2",
+      source: "3",
+      sourceHandle: "right-bottom",
+      target: "2",
+      targetHandle: "bottom-right",
       type: "smoothstep",
       animated: true,
       style: {

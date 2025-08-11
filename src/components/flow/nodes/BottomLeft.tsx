@@ -2,7 +2,6 @@ import { Handle, Position, type NodeProps } from "@xyflow/react";
 import { Card } from "primereact/card";
 import { getSmartHandleStyle } from "../utils/smartHandleStyles";
 
-// Custom node with bottom and left handles using Card
 export function BottomLeft({ data }: NodeProps) {
   return (
     <div style={{ position: "relative" }}>
@@ -10,14 +9,24 @@ export function BottomLeft({ data }: NodeProps) {
         type="target"
         position={Position.Left}
         id="left"
-        style={getSmartHandleStyle("target", Position.Left, { left: "-2px" })}
+        style={getSmartHandleStyle("target", Position.Left, { left: "-3px" })}
       />
       <Handle
         type="source"
         position={Position.Bottom}
-        id="bottom"
+        id="bottom-left"
         style={getSmartHandleStyle("source", Position.Bottom, {
-          bottom: "4px",
+          bottom: "-3px",
+          left: "30%",
+        })}
+      />
+      <Handle
+        type="target"
+        position={Position.Bottom}
+        id="bottom-right"
+        style={getSmartHandleStyle("target", Position.Bottom, {
+          bottom: "-3px",
+          right: "30%",
         })}
       />
       <Card

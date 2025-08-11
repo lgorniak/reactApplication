@@ -1,7 +1,6 @@
 import { Handle, Position } from "@xyflow/react";
 import { getSmartHandleStyle } from "../utils/smartHandleStyles";
 
-// Mini node with left and right handles - 3px x 3px
 export function MiniLeftRight() {
   return (
     <div style={{ position: "relative" }}>

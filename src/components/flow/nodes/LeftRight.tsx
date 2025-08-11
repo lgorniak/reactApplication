@@ -10,7 +10,7 @@ export function LeftRight({ data }: NodeProps) {
         type="target"
         position={Position.Left}
         id="left"
-        style={getSmartHandleStyle("target", Position.Left, { left: "-2px" })}
+        style={getSmartHandleStyle("target", Position.Left, { left: "-3px" })}
       />
       <Handle
         type="target"
@@ -18,14 +18,17 @@ export function LeftRight({ data }: NodeProps) {
         id="right-top"
         style={getSmartHandleStyle("target", Position.Right, {
           top: "30%",
-          right: "-2px",
+          right: "-3px",
         })}
       />
       <Handle
         type="source"
         position={Position.Right}
         id="right-bottom"
-        style={getSmartHandleStyle("source", Position.Right, { bottom: "4px" })}
+        style={getSmartHandleStyle("source", Position.Right, {
+          bottom: "3px",
+          top: "60%",
+        })}
       />
       <Card
         style={{
