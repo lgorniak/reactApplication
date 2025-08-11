@@ -9,14 +9,13 @@ export function BottomLeft({ data }: NodeProps) {
         type="target"
         position={Position.Left}
         id="left"
-        style={getSmartHandleStyle("target", Position.Left, { left: "-3px" })}
+        style={getSmartHandleStyle("target", Position.Left)}
       />
       <Handle
         type="source"
         position={Position.Bottom}
         id="bottom-left"
         style={getSmartHandleStyle("source", Position.Bottom, {
-          bottom: "-3px",
           left: "30%",
         })}
       />
@@ -25,7 +24,6 @@ export function BottomLeft({ data }: NodeProps) {
         position={Position.Bottom}
         id="bottom-right"
         style={getSmartHandleStyle("target", Position.Bottom, {
-          bottom: "-3px",
           right: "30%",
         })}
       />

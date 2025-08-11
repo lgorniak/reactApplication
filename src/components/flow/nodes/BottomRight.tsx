@@ -10,15 +10,13 @@ export function BottomRight({ data }: NodeProps) {
         type="source"
         position={Position.Bottom}
         id="bottom"
-        style={getSmartHandleStyle("source", Position.Bottom, {
-          bottom: "3px",
-        })}
+        style={getSmartHandleStyle("source", Position.Bottom)}
       />
       <Handle
         type="source"
         position={Position.Right}
         id="right"
-        style={getSmartHandleStyle("source", Position.Right, { right: "3px" })}
+        style={getSmartHandleStyle("source", Position.Right)}
       />
 
       <Card

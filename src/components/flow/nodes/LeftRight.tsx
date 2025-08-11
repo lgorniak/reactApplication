@@ -10,7 +10,7 @@ export function LeftRight({ data }: NodeProps) {
         type="target"
         position={Position.Left}
         id="left"
-        style={getSmartHandleStyle("target", Position.Left, { left: "-3px" })}
+        style={getSmartHandleStyle("target", Position.Left)}
       />
       <Handle
         type="target"
@@ -18,7 +18,6 @@ export function LeftRight({ data }: NodeProps) {
         id="right-top"
         style={getSmartHandleStyle("target", Position.Right, {
           top: "30%",
-          right: "-3px",
         })}
       />
       <Handle
@@ -26,7 +25,6 @@ export function LeftRight({ data }: NodeProps) {
         position={Position.Right}
         id="right-bottom"
         style={getSmartHandleStyle("source", Position.Right, {
-          bottom: "3px",
           top: "60%",
         })}
       />

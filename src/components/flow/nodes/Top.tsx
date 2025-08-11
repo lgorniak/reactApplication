@@ -10,7 +10,7 @@ export function Top({ data }: NodeProps) {
         type="target"
         position={Position.Top}
         id="top"
-        style={getSmartHandleStyle("target", Position.Top, { top: "-3px" })}
+        style={getSmartHandleStyle("target", Position.Top)}
       />
       <Card
         style={{
