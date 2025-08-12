@@ -1,10 +1,9 @@
 import { Handle, Position } from "@xyflow/react";
 import { getSmartHandleStyle } from "../utils/smartHandleStyles";
 
-
 export function MiniLeftRight() {
   return (
-    <div style={{ position: "relative" }}>
+    <div>
       <Handle
         type="source"
         position={Position.Left}

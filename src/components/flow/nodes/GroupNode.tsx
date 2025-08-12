@@ -1,6 +1,25 @@
-import { type NodeProps } from "@xyflow/react";
+import { Handle, Position, type NodeProps } from "@xyflow/react";
 import { Fieldset } from "primereact/fieldset";
+import { getSmartHandleStyle } from "../utils/smartHandleStyles";
 
 export function GroupNode({ data }: NodeProps) {
-  return <Fieldset legend={String(data?.label || "")}></Fieldset>;
+  return (
+    <div>
+      <Handle
+        type="source"
+        position={Position.Bottom}
+        id="bottom"
+        style={getSmartHandleStyle("source", Position.Bottom)}
+      />
+      <Handle
+        type="source"
+        position={Position.Bottom}
+        id="bottom-right"
+        style={getSmartHandleStyle("source", Position.Bottom, {
+          right: "25%",
+        })}
+      />
+      <Fieldset legend={String(data?.label || "")}></Fieldset>
+    </div>
+  );
 }

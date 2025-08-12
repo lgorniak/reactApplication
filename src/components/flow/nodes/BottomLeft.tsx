@@ -4,7 +4,7 @@ import { getSmartHandleStyle } from "../utils/smartHandleStyles";
 
 export function BottomLeft({ data }: NodeProps) {
   return (
-    <div style={{ position: "relative" }}>
+    <div>
       <Handle
         type="target"
         position={Position.Left}

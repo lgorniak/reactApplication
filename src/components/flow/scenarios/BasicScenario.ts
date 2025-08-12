@@ -133,5 +133,19 @@ export const BasicScenario: Scenario = {
         strokeDasharray: "5,5",
       },
     },
+    {
+      id: "egroup-4",
+      source: "group-1",
+      sourceHandle: "bottom",
+      target: "4",
+      targetHandle: "top",
+      type: "smoothstep",
+      animated: true,
+      style: {
+        stroke: "#9b59b6",
+        strokeWidth: 2,
+        strokeDasharray: "5,5",
+      },
+    },
   ],
 };

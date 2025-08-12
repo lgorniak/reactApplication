@@ -5,7 +5,7 @@ import { getSmartHandleStyle } from "../utils/smartHandleStyles";
 // Custom node with only a top handle using Card
 export function Top({ data }: NodeProps) {
   return (
-    <div style={{ position: "relative" }}>
+    <div>
       <Handle
         type="target"
         position={Position.Top}

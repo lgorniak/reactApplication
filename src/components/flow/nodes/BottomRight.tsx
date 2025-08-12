@@ -5,7 +5,7 @@ import { getSmartHandleStyle } from "../utils/smartHandleStyles";
 // Custom node with bottom and right handles using Card
 export function BottomRight({ data }: NodeProps) {
   return (
-    <div style={{ position: "relative" }}>
+    <div>
       <Handle
         type="source"
         position={Position.Bottom}

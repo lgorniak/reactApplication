@@ -5,7 +5,7 @@ import { getSmartHandleStyle } from "../utils/smartHandleStyles";
 // Custom node with left and right handles using Card
 export function LeftRight({ data }: NodeProps) {
   return (
-    <div style={{ position: "relative" }}>
+    <div>
       <Handle
         type="target"
         position={Position.Left}
