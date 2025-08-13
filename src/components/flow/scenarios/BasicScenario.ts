@@ -61,6 +61,18 @@ export const BasicScenario: Scenario = {
       data: {},
       type: "miniLeftRight",
     },
+    {
+      id: "6",
+      position: { x: 100, y: 350 },
+      data: { label: "Left Node" },
+      type: "horizontal",
+    },
+    {
+      id: "7",
+      position: { x: 350, y: 350 },
+      data: { label: "Right Node" },
+      type: "horizontal",
+    },
   ],
   edges: [
     {
@@ -146,6 +158,15 @@ export const BasicScenario: Scenario = {
         strokeWidth: 2,
         strokeDasharray: "5,5",
       },
+    },
+    {
+      id: "e6-7",
+      source: "6",
+      sourceHandle: "right-bottom",
+      target: "7",
+      targetHandle: "left",
+      type: "alternating",
+      animated: true,
     },
   ],
 };
