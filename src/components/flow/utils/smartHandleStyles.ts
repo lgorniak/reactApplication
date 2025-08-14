@@ -1,6 +1,7 @@
 import type { CSSProperties } from "react";
 import { Position } from "@xyflow/react";
 import { getTargetArrowStyle } from "./arrowStyles";
+import { type EdgeColorType } from "./edgeStyles";
 
 export type HandleType = "source" | "target" | "bidirectional";
 
@@ -16,12 +17,14 @@ const HANDLE_OFFSET = "-3px";
  * @param type - Handle type ("source" or "target")
  * @param position - Handle position (Position.Left, Position.Right, etc.)
  * @param customStyles - Optional additional positioning styles (overrides auto-positioning)
+ * @param colorType - Optional color type to apply to target handles
  * @returns CSS styles object for the handle
  */
 export function getSmartHandleStyle(
   type: HandleType,
   position: Position,
-  customStyles: CSSProperties = {}
+  customStyles: CSSProperties = {},
+  colorType?: EdgeColorType
 ): CSSProperties {
   // Get automatic positioning based on handle direction
   const autoPositioning = getAutoPositioning(position);
@@ -36,7 +39,11 @@ export function getSmartHandleStyle(
   }
 
   // Target handles get arrows pointing toward the node
-  return getTargetArrowStyle(position, { ...autoPositioning, ...customStyles });
+  return getTargetArrowStyle(
+    position,
+    { ...autoPositioning, ...customStyles },
+    colorType
+  );
 }
 
 /**

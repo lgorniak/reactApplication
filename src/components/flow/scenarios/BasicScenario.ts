@@ -16,7 +16,12 @@ export const BasicScenario: Scenario = {
     {
       id: "group-1",
       position: { x: 50, y: 50 },
-      data: { label: "Maschinen" },
+      data: {
+        label: "Maschinen",
+        handleColors: {
+          bottom: "gas",
+        },
+      },
       type: "groupBottom",
       style: {
         width: "500px",
@@ -31,7 +36,13 @@ export const BasicScenario: Scenario = {
     {
       id: "1",
       position: { x: 10, y: 40 },
-      data: { label: "Hello" },
+      data: {
+        label: "Hello",
+        handleColors: {
+          right: "energy",
+          bottom: "data",
+        },
+      },
       type: "bottomRight",
       parentId: "group-1",
       extent: "parent",
@@ -39,7 +50,14 @@ export const BasicScenario: Scenario = {
     {
       id: "2",
       position: { x: 240, y: 40 },
-      data: { label: "World" },
+      data: {
+        label: "World",
+        handleColors: {
+          left: "energy",
+          "bottom-left": "data",
+          "bottom-right": "heat",
+        },
+      },
       type: "bottomLeft",
       parentId: "group-1",
       extent: "parent",
@@ -47,13 +65,25 @@ export const BasicScenario: Scenario = {
     {
       id: "3",
       position: { x: 50, y: 250 },
-      data: { label: "horizontal" },
+      data: {
+        label: "horizontal",
+        handleColors: {
+          left: "data",
+          "right-top": "data",
+          "right-bottom": "heat",
+        },
+      },
       type: "leftRight",
     },
     {
       id: "4",
       position: { x: 400, y: 250 },
-      data: { label: "top" },
+      data: {
+        label: "top",
+        handleColors: {
+          top: "gas",
+        },
+      },
       type: "top",
     },
     {
@@ -65,13 +95,23 @@ export const BasicScenario: Scenario = {
     {
       id: "6",
       position: { x: 100, y: 350 },
-      data: { label: "Left Node" },
+      data: {
+        label: "Left Node",
+        handleColors: {
+          "right-bottom": "heat",
+        },
+      },
       type: "leftRight",
     },
     {
       id: "7",
       position: { x: 350, y: 350 },
-      data: { label: "Right Node" },
+      data: {
+        label: "Right Node",
+        handleColors: {
+          left: "heat",
+        },
+      },
       type: "leftRight",
     },
   ],

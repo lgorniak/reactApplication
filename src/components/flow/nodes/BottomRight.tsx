@@ -1,9 +1,13 @@
 import { Handle, Position, type NodeProps } from "@xyflow/react";
 import { Card } from "primereact/card";
 import { getSmartHandleStyle } from "../utils/smartHandleStyles";
+import { type EdgeColorType } from "../utils/edgeStyles";
 
 // Custom node with bottom and right handles using Card
 export function BottomRight({ data }: NodeProps) {
+  const handleColors =
+    (data?.handleColors as Record<string, EdgeColorType>) || {};
+
   return (
     <div>
       <Handle

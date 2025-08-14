@@ -1,8 +1,11 @@
 import { Handle, Position, type NodeProps } from "@xyflow/react";
 import { Fieldset } from "primereact/fieldset";
 import { getSmartHandleStyle } from "../utils/smartHandleStyles";
+import { type EdgeColorType } from "../utils/edgeStyles";
 
 export function GroupBottom({ data }: NodeProps) {
+  const handleColors =
+    (data?.handleColors as Record<string, EdgeColorType>) || {};
   return (
     <div>
       <Handle
