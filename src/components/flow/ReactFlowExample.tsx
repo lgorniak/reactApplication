@@ -12,21 +12,21 @@ import { BottomLeft } from "./nodes/BottomLeft";
 import { Top } from "./nodes/Top";
 import { GroupBottom } from "./nodes/GroupBottom";
 import { MiniLeftRight } from "./nodes/MiniLeftRight";
-import { AlternatingEdge } from "./edges/AlternatingEdge";
+import { AlternatingDirection } from "./edges/AlternatingDirection";
 import { BasicScenario } from "./scenarios/BasicScenario";
 import { Fieldset } from "primereact/fieldset";
 
 const nodeTypes = {
   bottomLeft: BottomLeft,
   bottomRight: BottomRight,
-  group: GroupBottom,
+  groupBottom: GroupBottom,
   leftRight: LeftRight,
   miniLeftRight: MiniLeftRight,
   top: Top,
 };
 
 const edgeTypes = {
-  alternating: AlternatingEdge,
+  alternating: AlternatingDirection,
 };
 
 export default function ReactFlowExample() {

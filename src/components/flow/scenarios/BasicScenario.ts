@@ -1,4 +1,5 @@
 import type { Node, Edge } from "@xyflow/react";
+import { createEdgeStyle } from "../utils/edgeStyles";
 
 export interface Scenario {
   name: string;
@@ -15,8 +16,8 @@ export const BasicScenario: Scenario = {
     {
       id: "group-1",
       position: { x: 50, y: 50 },
-      data: { label: "Hello & World Group" },
-      type: "group",
+      data: { label: "Maschinen" },
+      type: "groupBottom",
       style: {
         width: "500px",
         height: 150,
@@ -83,11 +84,7 @@ export const BasicScenario: Scenario = {
       targetHandle: "left",
       type: "smoothstep",
       animated: true,
-      style: {
-        stroke: "#ff6b6b",
-        strokeWidth: 2,
-        strokeDasharray: "5,5",
-      },
+      style: createEdgeStyle("energy"),
     },
     {
       id: "e1-3",
@@ -97,11 +94,7 @@ export const BasicScenario: Scenario = {
       targetHandle: "left",
       type: "smoothstep",
       animated: true,
-      style: {
-        stroke: "#4ecdc4",
-        strokeWidth: 2,
-        strokeDasharray: "5,5",
-      },
+      style: createEdgeStyle("data"),
     },
     {
       id: "e2-5",
@@ -111,11 +104,7 @@ export const BasicScenario: Scenario = {
       targetHandle: "right",
       type: "smoothstep",
       animated: true,
-      style: {
-        stroke: "#45b7d1",
-        strokeWidth: 2,
-        strokeDasharray: "5,5",
-      },
+      style: createEdgeStyle("data"),
     },
     {
       id: "e5-3",
@@ -125,11 +114,7 @@ export const BasicScenario: Scenario = {
       targetHandle: "right-top",
       type: "smoothstep",
       animated: true,
-      style: {
-        stroke: "#45b7d1",
-        strokeWidth: 2,
-        strokeDasharray: "5,5",
-      },
+      style: createEdgeStyle("data"),
     },
     {
       id: "e3-2",
@@ -139,11 +124,7 @@ export const BasicScenario: Scenario = {
       targetHandle: "bottom-right",
       type: "smoothstep",
       animated: true,
-      style: {
-        stroke: "#45b7d1",
-        strokeWidth: 2,
-        strokeDasharray: "5,5",
-      },
+      style: createEdgeStyle("heat"),
     },
     {
       id: "egroup-4",
@@ -153,11 +134,7 @@ export const BasicScenario: Scenario = {
       targetHandle: "top",
       type: "smoothstep",
       animated: true,
-      style: {
-        stroke: "#9b59b6",
-        strokeWidth: 2,
-        strokeDasharray: "5,5",
-      },
+      style: createEdgeStyle("gas"),
     },
     {
       id: "e6-7",
@@ -167,6 +144,7 @@ export const BasicScenario: Scenario = {
       targetHandle: "left",
       type: "alternating",
       animated: true,
+      style: createEdgeStyle("heat"),
     },
   ],
 };
