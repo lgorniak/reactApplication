@@ -17,12 +17,12 @@ import { BasicScenario } from "./scenarios/BasicScenario";
 import { Fieldset } from "primereact/fieldset";
 
 const nodeTypes = {
-  horizontal: LeftRight,
-  bottomRight: BottomRight,
   bottomLeft: BottomLeft,
-  top: Top,
+  bottomRight: BottomRight,
   group: GroupNode,
+  leftRight: LeftRight,
   miniLeftRight: MiniLeftRight,
+  top: Top,
 };
 
 const edgeTypes = {

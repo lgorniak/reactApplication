@@ -24,7 +24,7 @@ export function LeftRight({ data }: NodeProps) {
         type="source"
         position={Position.Right}
         id="right-bottom"
-        style={getSmartHandleStyle("source", Position.Right, {
+        style={getSmartHandleStyle("bidirectional", Position.Right, {
           top: "60%",
         })}
       />

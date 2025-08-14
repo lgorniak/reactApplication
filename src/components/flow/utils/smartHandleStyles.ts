@@ -2,7 +2,7 @@ import type { CSSProperties } from "react";
 import { Position } from "@xyflow/react";
 import { getTargetArrowStyle } from "./arrowStyles";
 
-export type HandleType = "source" | "target";
+export type HandleType = "source" | "target" | "bidirectional";
 
 // Standard offset distance for handle positioning outside node boundaries
 const HANDLE_OFFSET = "-3px";

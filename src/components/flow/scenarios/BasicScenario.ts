@@ -47,7 +47,7 @@ export const BasicScenario: Scenario = {
       id: "3",
       position: { x: 50, y: 250 },
       data: { label: "horizontal" },
-      type: "horizontal",
+      type: "leftRight",
     },
     {
       id: "4",
@@ -65,13 +65,13 @@ export const BasicScenario: Scenario = {
       id: "6",
       position: { x: 100, y: 350 },
       data: { label: "Left Node" },
-      type: "horizontal",
+      type: "leftRight",
     },
     {
       id: "7",
       position: { x: 350, y: 350 },
       data: { label: "Right Node" },
-      type: "horizontal",
+      type: "leftRight",
     },
   ],
   edges: [
