@@ -2,7 +2,7 @@ import { Handle, Position, type NodeProps } from "@xyflow/react";
 import { Fieldset } from "primereact/fieldset";
 import { getSmartHandleStyle } from "../utils/smartHandleStyles";
 
-export function GroupNode({ data }: NodeProps) {
+export function GroupBottom({ data }: NodeProps) {
   return (
     <div>
       <Handle
