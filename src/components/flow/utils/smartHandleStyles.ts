@@ -32,7 +32,9 @@ export function getSmartHandleStyle(
   // Source handles are invisible
   if (type === "source") {
     return {
-      opacity: 0,
+      // opacity: 0,
+      width: "10px",
+      height: "10px",
       ...autoPositioning,
       ...customStyles,
     };

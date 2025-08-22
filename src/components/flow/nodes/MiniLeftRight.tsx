@@ -1,11 +1,10 @@
 import { Handle, Position } from "@xyflow/react";
-import { getSmartHandleStyle } from "../utils/smartHandleStyles";
 
 export function MiniLeftRight() {
   return (
     <div>
       <Handle
-        type="source"
+        type="target"
         position={Position.Left}
         id="left"
         style={{ opacity: 0, left: "1px" }}
@@ -14,7 +13,7 @@ export function MiniLeftRight() {
         type="target"
         position={Position.Right}
         id="right"
-        style={getSmartHandleStyle("source", Position.Right, { right: "3px" })}
+        style={{ opacity: 0, right: "3px" }}
       />
       <div
         style={{
@@ -22,6 +21,7 @@ export function MiniLeftRight() {
           height: "1px",
         }}
       />
+      {String("testomg")}
     </div>
   );
 }
